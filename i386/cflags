@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+# specify platform depended compiler flags here
+export COMPILER_FLAGS="-m32 -Wno-long-long" 

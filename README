@@ -1,0 +1,66 @@
+  _____     _      ___    ___,--._________
+_/ ____\ ||/  /// /_____,(_X_)      ____  \___
+__/ __ \\\\\o||||//______/ \ \_____/ .__\_____:__
+___/ _|||||||||||||_        \________|___________|___
+    | _____________ |   C22 |.-..-..-..-..-..-..-..-.|
+::=:|      ___      |:=:__  ||p||l||e||t||h||o||r||a||
+::=:|               |:=:__\ |:=::=::=::=::=::=::=::=:|
+::=:|   I R O N Y   |:=._ \\_/--/--/--/--/--/--/--/--'
+::=:|      ___      |:=._\ \___/  /  / _/  /  /  /
+::=;| _____________ |:=._\\______/  / / __/  /  /
+ _/ |_______________|    \\________/ / /  __/  /
+(_)__//|||||||\\\\\\_____ \_________/ /  /  __/ 
+ |\__/ ||''''' |||\\____ \___________/  /  /
+ |     |-|TTTT|//' \___ \______________/  /
+(_)    `-|____|/_______\_________________/
+
+
+
+DESCRIPTION
+Another useless text editor in a great plethora of open source software. It's unstable and has been made standard library independent for memes as well as for challenge to myself. By default it uses stdlib until you specify the given architecture while compiling via make or manually which is useless yet because without stdlib it won't work as you can guess by initial and only commit.
+   
+
+BUILDING
+You can build it just by using `make` or manually:
+
+With stdlib:
+    $CC -s -g -O3 -Os \
+        -Wall \
+        -Wextra \
+        -Wshadow \
+        -Wno-missing-field-initializers \
+        -o plethora \
+        <platform folder>/platform.c
+ 
+Without stdlib:
+    $CC -s -g -O3 -Os \
+        -Wall \
+        -Wextra \
+        -Wshadow \
+        -Wno-missing-field-initializers \
+        -fno-asynchronous-unwind-tables \
+        -fno-unwind-tables \
+        -Wl,--gc-sections \
+        -Wa,--noexecstack \
+        -fdata-sections \
+        -fno-builtin \
+        -nostdlib \
+        -o plethora \
+        <platform folder>/platform.c <platform folder>/start.S \ 
+        && strip -R .comment $@ \
+		&& strip -R .note.gnu.build-id $@
+
+    
+TODO
+    - Continuous refactoring 
+    + Status line
+    - Find buffer scrolling arrow directions
+    - Debug on window resize
+    - Syntax highlighting
+    - Fix guerilla mode 
+    - .plethorarc 
+    - Fix types and attributes
+    - Tests
+    ? Vim like modes 
+    - Multiple read/write and output buffers (for line numbers also) 
+    - Multiple cursors
