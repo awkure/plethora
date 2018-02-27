@@ -501,7 +501,6 @@ e_draw_rows(struct abuf * ab)
             } else 
                 ab_appd(ab, "~", 1);
         } else {
-            //int ln = (EC.row[sr].sz > EC.term_cols) ? EC.term_cols : EC.row[sr].sz;
             size_t ln = EC.row[sr].rsz - EC.cscr > (size_t)EC.term_cols ? 
                 (size_t)EC.term_cols : EC.row[sr].rsz - EC.cscr;
 
@@ -541,11 +540,9 @@ e_draw_sb(struct abuf * ab)
     ab_appd(ab, "\x1b[7m", 4);
     char st[80], rst[80];
 
-    //int l = snprintf(st, sizeof(st), "[%s] %.20s%1s ", 
     int l = sprintf(st, "[%s] %.20s%1s ", 
             EC.mode ? "INSERT" : "NORMAL", EC.fn ? EC.fn : "[Unnamed]", (EC.flags & E_DIRT) ? "+" : "");
-    /* TODO */
-    //int rl = snprintf(rst, sizeof(rst)+1, "%s | c:%02li r:%02li", 
+
     int rl = sprintf(rst, "%s | c:%02li r:%02li", 
             EC.syn ? EC.syn->ft : "plain text", EC.cx + 1, EC.cy + 1);
 
@@ -682,9 +679,7 @@ e_upd_row(e_row * r)
     
     free(r->rch);
     r->rch = calloc(r->sz, r->sz + tabs * (EDITOR_TAB_WIDTH - 1) + 1);
-
-    // TODO: potential memory leak and get tid off j;
-    // ch 4: text viewer 
+ 
     int i = 0;
     for (j = 0; j < r->sz; ++j)
         if (r->ch[j] == '\t') {
